@@ -20,20 +20,33 @@ app.get('/', (req, res) => {
 // const chatRooms = ['General', 'Jokies', 'clock-room'];
 
 // User name - HANDSHAKE
-// io.use((socket, next) => {
-//   const username = socket.handshake.auth.username;
-//   if (!username) {
-//     return next(new Error('invalid username'));
-//   }
-//   socket.username = username;
-//   next();
-// });
+io.use((socket, next) => {
+  const userName = socket.handshake.auth.username;
+
+  // if (!loggedUser) {
+  //   return next(new Error('invalid username'));
+  // }
+  socket.username = userName;
+  next();
+});
 
 io.on('connection', (socket) => {
   console.log('a user connected');
-  socket.on('test', (userName) => {
-    // io.emit('return message', userName);
+
+  socket.on('Welcome Message', (name) => {
+    console.log(`User ${name} has joined ChatApp`);
   });
+
+  // io.on('connection', (socket) => {
+  socket.on('chat message', (msg, name) => {
+    socket.emit('chat message', (msg, name));
+    console.log(`User ${name} wrote ${msg}`);
+    // });
+  });
+
+  // socket.on('test', (loggedUser) => {
+  //   io.emit('return message', loggedUser);
+  // });
   // fetch existing users
   // const users = [];
   // for (let [id, socket] of io.of('/').sockets) {
@@ -50,10 +63,10 @@ io.on('connection', (socket) => {
   // socket.join(chatRooms[0]);
 
   // notify existing users
-  socket.broadcast.emit('user connected', {
-    userID: socket.id,
-    username: socket.username,
-  });
+  // socket.broadcast.emit('user connected', {
+  //   userID: socket.id,
+  //   username: socket.username,
+  // });
   // forward the private message to the right recipient
   socket.on('private message', ({ content, to }) => {
     socket.to(to).emit('private message', {
