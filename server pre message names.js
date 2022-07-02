@@ -40,10 +40,10 @@ io.on('connection', (socket) => {
   io.emit('users', users);
 
   // notify existing users
-  // socket.broadcast.emit('user connected', {
-  //   userID: socket.id,
-  //   username: socket.userName,
-  // });
+  socket.broadcast.emit('user connected', {
+    userID: socket.id,
+    username: socket.userName,
+  });
 
   console.log('a user connected');
   console.log(`Socket id: ${socket.id}`);
@@ -53,15 +53,14 @@ io.on('connection', (socket) => {
   /// Unique welcome message
   socket.on('Welcome Message', (name) => {
     console.log(`User ${name} has joined room ${chatRooms[0]}`);
-    // io.emit('Welcome Message', name);
   });
 
   // General send message
-  socket.on('chat message', (data) => {
-    io.emit('chat message', { username: socket.userName, message: data });
+  socket.on('chat message', (msg) => {
+    io.emit('chat message', msg);
     // io.in(chatRooms[0]).emit('chat message', msg);
 
-    console.log(`User ${socket.userName} wrote ${data}`);
+    console.log(`User ${socket.username} wrote ${msg}`);
     console.log(users);
   });
 
