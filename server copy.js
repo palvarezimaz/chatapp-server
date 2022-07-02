@@ -37,7 +37,7 @@ io.on('connection', (socket) => {
     });
   }
 
-  io.emit('users', users);
+  socket.emit('users', users);
 
   // notify existing users
   socket.broadcast.emit('user connected', {
@@ -74,10 +74,9 @@ io.on('connection', (socket) => {
 
   // notify users upon disconnection
   socket.on('disconnect', () => {
-    io.emit('user disconnected', socket.id); //
-    //
+    socket.emit('user disconnected', socket.id);
     // socket.leave(chatRooms[0]);
-    console.log('user disconnected', socket.id);
+    console.log('user disconnected');
   });
 });
 
