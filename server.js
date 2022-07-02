@@ -10,7 +10,7 @@ const io = socketIo(server, {
   },
 });
 
-///Server chat rooms
+///Server chat rooms ////// NEEDS WORK
 const chatRooms = ['General', 'Jokies', 'clock-room'];
 
 app.get('/', (req, res) => {
@@ -26,7 +26,7 @@ io.use((socket, next) => {
   next();
 });
 
-///////// Connection through CORS
+//////// Adding user to the list of users
 io.on('connection', (socket) => {
   const users = [];
 
@@ -70,10 +70,11 @@ io.on('connection', (socket) => {
   });
 
   // forward the private message to the right recipient
-  socket.on('private message', ({ content, to }) => {
+  socket.on('direct message', ({ content, to }) => {
     socket.to(to).emit('private message', {
-      content,
-      from: socket.id,
+      username: socket.userName,
+      message: content,
+      timestamp: new Date().toLocaleTimeString(),
     });
   });
 
