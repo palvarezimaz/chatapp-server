@@ -58,7 +58,11 @@ io.on('connection', (socket) => {
 
   // General send message
   socket.on('chat message', (data) => {
-    io.emit('chat message', { username: socket.userName, message: data });
+    io.emit('chat message', {
+      username: socket.userName,
+      message: data,
+      timestamp: new Date().toLocaleTimeString(),
+    });
     // io.in(chatRooms[0]).emit('chat message', msg);
 
     console.log(`User ${socket.userName} wrote ${data}`);
