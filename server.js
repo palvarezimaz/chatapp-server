@@ -71,9 +71,10 @@ io.on('connection', (socket) => {
 
   // forward the private message to the right recipient
   socket.on('direct message', ({ content, to }) => {
-    socket.to(to).emit('private message', {
-      username: socket.userName,
+    io.to(to).emit('private message', {
       message: content,
+      to: to,
+      from: socket.userName,
       timestamp: new Date().toLocaleTimeString(),
     });
   });
