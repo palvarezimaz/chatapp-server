@@ -13,11 +13,20 @@ const io = socketIo(server, {
 ///Server chat rooms ////// NEEDS WORK
 const chatRooms = ['General', 'Jokies', 'clock-room'];
 
-app.get('/', (req, res) => {
-  res.send(
-    '<h1>ChatApp Server - Thanks for putting me up!</h1><br><h3>Access the client via port 3000</h3>'
-  );
-});
+if (process.env.NODE_ENV === 'production') {
+  const path = require('path');
+  app.use(express.static(path.join(__dirname, 'build')));
+
+  app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'build', 'index.html'));
+  });
+}
+
+// app.get('/', (req, res) => {
+//   res.send(
+//     '<h1>ChatApp Server - Thanks for putting me up!</h1><br><h3>Access the client via port 3000</h3>'
+//   );
+// });
 
 // User name - HANDSHAKE -- NEEDS WORK
 io.use((socket, next) => {
@@ -77,7 +86,7 @@ io.on('connection', (socket) => {
       timestamp: new Date().toLocaleTimeString(),
     });
   });
-
+  /////////// This needs work ///////
   // notify users upon disconnection
   socket.on('disconnect', () => {
     io.emit('user disconnected', socket.id); //
