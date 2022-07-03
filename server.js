@@ -13,15 +13,6 @@ const io = socketIo(server, {
 ///Server chat rooms ////// NEEDS WORK
 const chatRooms = ['General', 'Jokies', 'clock-room'];
 
-if (process.env.NODE_ENV === 'production') {
-  const path = require('path');
-  app.use(express.static(path.join(__dirname, 'build')));
-
-  app.get('/*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'build', 'index.html'));
-  });
-}
-
 // app.get('/', (req, res) => {
 //   res.send(
 //     '<h1>ChatApp Server - Thanks for putting me up!</h1><br><h3>Access the client via port 3000</h3>'
@@ -97,6 +88,16 @@ io.on('connection', (socket) => {
 });
 
 ////////////// SERVER PORT
+
+if (process.env.NODE_ENV === 'production') {
+  const path = require('path');
+  app.use(express.static(path.join(__dirname, 'build')));
+
+  app.get('/*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'build', 'index.html'));
+  });
+}
+
 server.listen(PORT, (err) => {
   if (err) console.log(err);
   console.log('Server running on Port ', PORT);
