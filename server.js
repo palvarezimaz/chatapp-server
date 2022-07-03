@@ -4,14 +4,11 @@ const http = require('http');
 const PORT = process.env.PORT || 3002;
 const app = express();
 const server = http.createServer(app);
-const io = socketIo(
-  server
-  //   , {
-  //   cors: {
-  //     origin: 'http://localhost:3000',
-  //   },
-  // }
-);
+const io = socketIo(server, {
+  cors: {
+    origin: 'http://localhost:3000',
+  },
+});
 
 ///Server chat rooms ////// NEEDS WORK
 const chatRooms = ['General', 'Jokies', 'clock-room'];
