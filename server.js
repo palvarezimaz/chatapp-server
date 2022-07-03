@@ -4,14 +4,11 @@ const http = require('http');
 const PORT = process.env.PORT || 3002;
 const app = express();
 const server = http.createServer(app);
-const io = socketIo(
-  server
-  //   , {
-  //   cors: {
-  //     origin: 'http://localhost:3000',
-  //   },
-  // }
-);
+const io = socketIo(server, {
+  cors: {
+    origin: 'http://localhost:3000',
+  },
+});
 
 ///Server chat rooms ////// NEEDS WORK
 const chatRooms = ['General', 'Jokies', 'clock-room'];
@@ -20,7 +17,7 @@ if (process.env.NODE_ENV === 'production') {
   const path = require('path');
   app.use(express.static(path.join(__dirname, 'build')));
 
-  app.get('/', (req, res) => {
+  app.get('/*', (req, res) => {
     res.sendFile(path.join(__dirname, 'build', 'index.html'));
   });
 }
