@@ -4,9 +4,13 @@ const http = require('http');
 const PORT = process.env.PORT || 3002;
 const app = express();
 const server = http.createServer(app);
+let origin = 'http://localhost:3000';
+if (process.env.NODE_ENV === 'production') {
+  origin = 'https://paichatapp.herokuapp.com/';
+}
 const io = socketIo(server, {
   cors: {
-    origin: 'http://localhost:3000',
+    origin,
   },
 });
 
@@ -71,9 +75,10 @@ io.on('connection', (socket) => {
 
   // forward the private message to the right recipient
   socket.on('direct message', ({ content, to }) => {
-    socket.to(to).emit('private message', {
-      username: socket.userName,
+    io.to(to).emit('private message', {
       message: content,
+      to: to,
+      from: socket.userName,
       timestamp: new Date().toLocaleTimeString(),
     });
   });
@@ -88,7 +93,6 @@ io.on('connection', (socket) => {
 });
 
 ////////////// SERVER PORT
-
 if (process.env.NODE_ENV === 'production') {
   const path = require('path');
   app.use(express.static(path.join(__dirname, 'build')));
