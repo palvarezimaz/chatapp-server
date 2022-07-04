@@ -32,7 +32,7 @@ io.use((socket, next) => {
 
 //////// Adding user to the list of users
 io.on('connection', (socket) => {
-  const users = [];
+  let users = [];
 
   for (let [id, socket] of io.of('/').sockets) {
     users.push({
@@ -75,18 +75,26 @@ io.on('connection', (socket) => {
 
   // forward the private message to the right recipient
   socket.on('direct message', ({ content, to }) => {
-    io.to(to).emit('private message', {
+    socket.to(to).emit('direct message', {
       message: content,
       to: to,
       from: socket.userName,
       timestamp: new Date().toLocaleTimeString(),
     });
   });
-  /////////// This needs work ///////
+
   // notify users upon disconnection
+  /// SERVER SIDE
   socket.on('disconnect', () => {
-    io.emit('user disconnected', socket.id); //
-    //
+    socket.emit('user disconnected', socket.id); //
+    let users = [];
+    for (let [id, socket] of io.of('/').sockets) {
+      users.push({
+        userID: id,
+        username: socket.userName,
+      });
+    }
+    io.emit('users', users);
     // socket.leave(chatRooms[0]);
     console.log('user disconnected', socket.id);
   });
