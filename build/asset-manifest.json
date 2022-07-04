@@ -1,18 +1,5 @@
 {
   "files": {
-<<<<<<< HEAD
-    "main.css": "/static/css/main.16e1b60a.css",
-    "main.js": "/static/js/main.af96db7c.js",
-    "static/js/787.ae9c51a5.chunk.js": "/static/js/787.ae9c51a5.chunk.js",
-    "index.html": "/index.html",
-    "main.16e1b60a.css.map": "/static/css/main.16e1b60a.css.map",
-    "main.af96db7c.js.map": "/static/js/main.af96db7c.js.map",
-    "787.ae9c51a5.chunk.js.map": "/static/js/787.ae9c51a5.chunk.js.map"
-  },
-  "entrypoints": [
-    "static/css/main.16e1b60a.css",
-    "static/js/main.af96db7c.js"
-=======
     "main.css": "/static/css/main.73332c34.css",
     "main.js": "/static/js/main.00ceac94.js",
     "static/js/787.ae9c51a5.chunk.js": "/static/js/787.ae9c51a5.chunk.js",
@@ -24,6 +11,5 @@
   "entrypoints": [
     "static/css/main.73332c34.css",
     "static/js/main.00ceac94.js"
->>>>>>> third-stage
   ]
 }
