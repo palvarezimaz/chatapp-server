@@ -4,9 +4,13 @@ const http = require('http');
 const PORT = process.env.PORT || 3002;
 const app = express();
 const server = http.createServer(app);
+let origin = 'http://localhost:3000';
+if (process.env.NODE_ENV === 'production') {
+  origin = 'https://paichatapp.herokuapp.com/';
+}
 const io = socketIo(server, {
   cors: {
-    origin: 'http://localhost:3000',
+    origin,
   },
 });
 
