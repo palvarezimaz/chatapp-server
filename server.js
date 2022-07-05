@@ -14,8 +14,8 @@ const io = socketIo(server, {
   },
 });
 
-///Server chat rooms ////// NEEDS WORK
-const chatRooms = ['General', 'Jokies', 'clock-room'];
+///Server chat rooms ////// Future Development
+// const chatRooms = ['General', 'Jokies', 'clock-room'];
 
 // app.get('/', (req, res) => {
 //   res.send(
@@ -54,11 +54,11 @@ io.on('connection', (socket) => {
 
   // socket.join(chatRooms[0]);
 
-  /// Unique welcome message
-  socket.on('Welcome Message', (name) => {
-    console.log(`User ${name} has joined room ${chatRooms[0]}`);
-    // io.emit('Welcome Message', name);
-  });
+  /// Unique welcome message - FUTURE DEVELOPMENT
+  // socket.on('Welcome Message', (name) => {
+  // console.log(`User ${name} has joined room ${chatRooms[0]}`);
+  // io.emit('Welcome Message', name);
+  // });
 
   // General send message
   socket.on('chat message', (data) => {
@@ -69,8 +69,8 @@ io.on('connection', (socket) => {
     });
     // io.in(chatRooms[0]).emit('chat message', msg);
 
-    console.log(`User ${socket.userName} wrote ${data}`);
-    console.log(users);
+    // console.log(`User ${socket.userName} wrote ${data}`);
+    // console.log(users);
   });
 
   // forward the private message to the right recipient
