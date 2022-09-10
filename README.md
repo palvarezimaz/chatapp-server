@@ -13,9 +13,9 @@ https://github.com/palvarezimaz/chatapp-client
 
 A proof of concept, real-time message app using React as Front end and Express as Back end, served by Socket.io as a websocket implementation.
 
-See the app [here](https://paichatapp.herokuapp.com/){:target='\_blank'}
+See the app [here](https://paichatapp.herokuapp.com/)
 
-This is paired with the by the ChatApp client - [open it on a new tab here](https://github.com/palvarezimaz/chatapp-client){:target='\_blank'}
+This is paired with the by the ChatApp client - [open it on a new tab here](https://github.com/palvarezimaz/chatapp-client)
 
 ### General Approach
 
