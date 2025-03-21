@@ -14,7 +14,7 @@ const io = socketIo(server, {
   cors: {
     origin,
     methods: ["GET", "POST"],
-    allowedHeaders: ["my-custom-header"],
+    allowedHeaders: ["Access-Control-Allow-Origin"],
   },
 });
 
