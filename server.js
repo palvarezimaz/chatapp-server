@@ -13,7 +13,10 @@ if (process.env.NODE_ENV === 'production') {
 const io = socketIo(server, {
   cors: {
     origin,
-    methods: ["GET", "POST"]
+    methods: ["GET", "POST"],
+    extraHeaders: {
+      "my-custom-header": "ChatApp"
+    },
   },
 });
 
