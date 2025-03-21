@@ -8,7 +8,7 @@ const server = http.createServer(app);
 let origin = 'http://localhost:3000';
 
 if (process.env.NODE_ENV === 'production') {
-  origin = 'https://palvarezimaz.github.io/chatapp-client/';
+  origin = 'https://palvarezimaz.github.io/';
 }
 const io = socketIo(server, {
   cors: {
