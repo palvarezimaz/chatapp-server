@@ -14,9 +14,7 @@ const io = socketIo(server, {
   cors: {
     origin,
     methods: ["GET", "POST"],
-    extraHeaders: {
-      "my-custom-header": "ChatApp"
-    },
+    allowedHeaders: ["my-custom-header"],
   },
 });
 
