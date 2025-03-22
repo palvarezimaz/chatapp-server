@@ -5,7 +5,7 @@ const PORT = 8000;
 const app = express();
 const server = http.createServer(app);
 
-origin = 'https://palvarezimaz.github.io/chatapp-client';
+origin = 'https://palvarezimaz.github.io';
 
 const io = socketIo(server, {
   cors: {
