@@ -2,7 +2,7 @@
   "name": "chatappserver",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "readme.md",
   "scripts": {
     "start": "node server.js"
   },
