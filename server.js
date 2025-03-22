@@ -1,15 +1,12 @@
 const express = require('express');
 const socketIo = require('socket.io');
 const http = require('http');
-const PORT = process.env.PORT || 3002;
+const PORT = 3002;
 const app = express();
 const server = http.createServer(app);
 
-let origin = 'http://localhost:3000';
+origin = 'https://palvarezimaz.github.io/chatapp-client';
 
-if (process.env.NODE_ENV === 'production') {
-  origin = 'https://palvarezimaz.github.io/chatapp-client';
-}
 const io = socketIo(server, {
   cors: {
     origin,
@@ -17,7 +14,6 @@ const io = socketIo(server, {
     allowedHeaders: ["Access-Control-Allow-Origin"],
   },
 });
-
 
 // User name - HANDSHAKE
 io.use((socket, next) => {
@@ -75,14 +71,13 @@ io.on('connection', (socket) => {
 });
 
 ////////////// SERVER PORT
-if (process.env.NODE_ENV === 'production') {
-  const path = require('path');
-  app.use(express.static(path.join(__dirname, 'build')));
+const path = require('path');
+app.use(express.static(path.join(__dirname, 'build')));
 
-  app.get('/*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'build', 'index.html'));
-  });
-}
+app.get('/*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
+
 
 server.listen(PORT, (err) => {
   if (err) console.log(err);
