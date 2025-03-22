@@ -13,11 +13,11 @@ https://github.com/palvarezimaz/chatapp-client
 
 A proof of concept, real-time message app using React as Front end and Express as Back end, served by Socket.io as a websocket implementation.
 
-See the app [here](https://github.com/palvarezimaz/chatapp-client)
-
 This is paired with the by the ChatApp client - [open it on a new tab here](https://github.com/palvarezimaz/chatapp-client)
 
 ### General Approach
+
+**2025 Update** Project has been moved from Heroku to Serv00. Some configurations had to be changed. No welcome page, it replicates the client, but it doesn't work. See the app [here](https://pai-chatapp-server.koyeb.app/)
 
 As a POC, the general approach was to fist give an overview to the documentation of both React and Socket.io, as they were, at the time, new technologies for me. Afterwards, I drafted a development plan, which tried to be as down to earth as possible. Considering that I only had a (busy) week to get the job done, I design a POC App with basic but working functionalities.
 
